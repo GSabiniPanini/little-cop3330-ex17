@@ -38,6 +38,73 @@ public class App
 
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        App myApp = new App();
+
+        String gender = myApp.getgender();
+        Integer a = myApp.getalcoholconsumed();
+        Integer w = myApp.getweight();
+        Integer h = myApp.gethours();
+        double r = myApp.getratio(gender);
+
+        double bac = myApp.calcbac(a, w, h, r);
+        String msg = myApp.generateoutput(bac);
+
+        myApp.output(msg);
+    }
+
+    public void output(String msg)
+    {
+        System.out.println(msg);
+    }
+
+    public String generateoutput(double bac)
+    {
+        String msg = bac >= 0.08
+                ? "It is not legal for you to drive."
+                : "It is legal for you to drive.";
+        return msg;
+    }
+
+    public double calcbac(Integer a, Integer w, Integer h, double r)
+    {
+        double bac = a * 5.14 / w * r - .015 * h;
+        System.out.printf("Your BAC is %.2f%n", bac);
+        return bac;
+    }
+
+    public double getratio(String gender)
+    {
+        double r = gender == "man"
+                ? 0.73
+                : 0.66;
+        return r;
+    }
+
+    public String getgender()
+    {
+        System.out.print("Are you a man or a woman? ");
+        String gender = in.nextLine();
+        return gender;
+    }
+
+    public Integer gethours()
+    {
+        System.out.print("How many hours has it been since your last drink? ");
+        Integer h = in.nextInt();
+        return h;
+    }
+
+    public Integer getweight()
+    {
+        System.out.print("How much do you weigh? ");
+        Integer w = in.nextInt();
+        return w;
+    }
+
+    public Integer getalcoholconsumed()
+    {
+        System.out.print("How much alcohol have you consumed total? ");
+        Integer a = in.nextInt();
+        return a;
     }
 }
